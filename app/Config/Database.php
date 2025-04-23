@@ -27,8 +27,8 @@ class Database extends Config
     public array $default = [
         'DSN'          => '',
         'hostname'     => 'localhost',
-        'username'     => 'root',
-        'password'     => '',
+        'username'     => 'medilink',
+        'password'     => 'gAlrSyYN7i',
         'database'     => 'medilink',
         'DBDriver'     => 'MySQLi',
         'DBPrefix'     => '',
