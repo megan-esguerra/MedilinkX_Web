@@ -26,11 +26,12 @@ function getExpiringProducts() {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-// Function to get stock movements
+// Function to get stock movements (updated to include product_id)
 function getStockMovements() {
     global $pdo;
     try {
-        $stmt = $pdo->query("SELECT p.name as product_name, 
+        $stmt = $pdo->query("SELECT p.product_id,
+                                   p.name as product_name, 
                                    p.stock as current_stock,
                                    p.reorder_level,
                                    CASE 
@@ -330,7 +331,7 @@ $stockMovements = getStockMovements();
                 </div>
                 <form method="POST">
                     <div class="modal-body">
-                        <input type="hidden" name="product_id" id="modal_product_id">
+                        <!-- Using modal to select product by product_id -->
                         <div class="mb-3">
                             <label class="form-label">Product</label>
                             <select name="product_id" class="form-select" required>
@@ -366,6 +367,7 @@ $stockMovements = getStockMovements();
         </div>
     </div>
 
+    <!-- jQuery and Bootstrap Bundle -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>

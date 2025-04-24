@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            background-color: #007bff;
+            background-color: #6c97c5;
             color: white;
             display: flex;
             align-items: center;
@@ -154,19 +154,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             text-transform: uppercase;
         }
         .card-header {
-            background-color: #007bff;
-            color: white;
-        }
+    background-color: #4a89dc;
+    color: white;
+}
         .card-header i {
             margin-right: 5px;
         }
         .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
+            background-color: #4a89dc;
+            border-color: #4a89dc;
         }
         .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
+            background-color: #4a89dc;
+            border-color: #4a89dc;
         }
         .form-label {
             font-weight: bold;

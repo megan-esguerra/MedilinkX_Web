@@ -66,6 +66,10 @@ if (isset($_GET['delete'])) {
         // Delete related records
         $pdo->prepare("DELETE FROM order_items WHERE product_id = ?")->execute([$id]);
         $pdo->prepare("DELETE FROM prescriptions WHERE product_id = ?")->execute([$id]);
+        // Delete from stock_movements to remove child rows that reference the product
+        $pdo->prepare("DELETE FROM stock_movements WHERE product_id = ?")->execute([$id]);
+        
+        // Now delete the product itself
         $pdo->prepare("DELETE FROM products WHERE product_id = ?")->execute([$id]);
         
         $pdo->commit();
@@ -207,8 +211,7 @@ foreach ($products as $product) {
                 </div>
             </div>
 
-            <!-- Rest of your existing code... -->
-              <!-- Add Product Form -->
+            <!-- Add Product Form -->
             <div class="card mb-4">
                 <div class="card-header">
                     <h5 class="mb-0"><i class="fas fa-plus-circle me-2"></i>Add New Product</h5>
@@ -278,7 +281,6 @@ foreach ($products as $product) {
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0"><i class="fas fa-list me-2"></i>Products List</h5>
-                
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -307,20 +309,16 @@ foreach ($products as $product) {
                                     <td><?= htmlspecialchars($product['supplier_name']) ?></td>
                                     <td>$<?= number_format($product['price'], 2) ?></td>
                                     <td>
-                                        <span class="badge bg-<?= $product['stock'] == 0 ? 'danger' : 
-                                                              ($product['stock'] <= $product['reorder_level'] ? 'warning' : 'success') ?>">
+                                        <span class="badge bg-<?= $product['stock'] == 0 ? 'danger' : ($product['stock'] <= $product['reorder_level'] ? 'warning' : 'success') ?>">
                                             <?= $product['stock'] == 0 ? 'Out of Stock' : $product['stock'] ?>
                                         </span>
                                     </td>
                                     <td><?= $product['expiration_date'] ?></td>
                                     <td>
-                                        <a href="edit_product.php?id=<?= $product['product_id'] ?>" 
-                                           class="btn btn-sm btn-warning">
+                                        <a href="edit_product.php?id=<?= $product['product_id'] ?>" class="btn btn-sm btn-warning">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="?delete=<?= $product['product_id'] ?>" 
-                                           class="btn btn-sm btn-danger"
-                                           onclick="return confirm('Are you sure you want to delete this product?')">
+                                        <a href="?delete=<?= $product['product_id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this product?')">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </td>
@@ -334,6 +332,7 @@ foreach ($products as $product) {
         </div>
     </div>
 
+    <!-- jQuery and Bootstrap Bundle -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
