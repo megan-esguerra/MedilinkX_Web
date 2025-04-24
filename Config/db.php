@@ -1,8 +1,8 @@
 <?php
 $host = "localhost";
-$dbname = "u591433413_medilink"; // Fixed variable name
-$username = "u591433413_medilink";
-$password = "gAlrSyYN7i";
+$dbname = "medilink";
+$username = "root";
+$password = "";
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
