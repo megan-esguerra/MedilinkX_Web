@@ -1,3 +1,62 @@
+<?php
+session_start();
+require_once 'Config/db.php';
+require_once 'components/check_session.php';
+
+// Check session
+checkSession();
+
+// Get user information with proper error handling
+try {
+    $user_id = $_SESSION['user_id'];
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE user_id = ?");
+    $stmt->execute([$user_id]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$user) {
+        // User not found in database
+        session_destroy();
+        header("Location: login.php?error=invalid_user");
+        exit;
+    }
+
+    // Get dashboard statistics
+    $totalProducts = $pdo->query("SELECT COUNT(*) FROM products")->fetchColumn() ?? 0;
+    $totalUsers = $pdo->query("SELECT COUNT(*) FROM users")->fetchColumn() ?? 0;
+    $todayMoney = $pdo->query("SELECT COALESCE(SUM(total_amount), 0) FROM orders WHERE DATE(order_date) = CURRENT_DATE")->fetchColumn() ?? 0;
+    $totalSales = $pdo->query("SELECT COALESCE(SUM(total_amount), 0) FROM orders")->fetchColumn() ?? 0;
+
+    // Get recent orders
+    $recentOrders = $pdo->query("
+        SELECT o.*, u.username, u.full_name 
+        FROM orders o 
+        LEFT JOIN users u ON o.user_id = u.user_id 
+        ORDER BY o.order_date DESC 
+        LIMIT 5
+    ")->fetchAll(PDO::FETCH_ASSOC) ?? [];
+
+} catch (PDOException $e) {
+    error_log("Database error: " . $e->getMessage());
+    $user = [
+        'username' => 'Guest',
+        'full_name' => 'Guest User'
+    ];
+    $totalProducts = 0;
+    $totalUsers = 0;
+    $todayMoney = 0;
+    $totalSales = 0;
+    $recentOrders = [];
+}
+
+// Set username with validation
+$userName = !empty($user['full_name']) ? htmlspecialchars($user['full_name']) : 
+           (!empty($user['username']) ? htmlspecialchars($user['username']) : 'Guest');
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -328,17 +387,38 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="products.php" class="nav-link">
                     <i class="fas fa-table"></i> Products
                 </a>
             </li>
             <li class="nav-item">
+    <a href="categories.php" class="nav-link">
+        <i class="fas fa-list"></i> Categories
+    </a>
+</li>
+<!-- In your dashboard.php sidebar -->
+<li class="nav-item">
+    <a href="inventory_management.php" class="nav-link">
+        <i class="fas fa-boxes"></i> Inventory
+    </a>
+</li>
+<li class="nav-item">
+    <a href="sales_report.php" class="nav-link">
+        <i class="fas fa-chart-bar"></i> Sales Report
+    </a>
+</li>
+     <!-- <li class="nav-item">
+     <a href="user-management.php" class="nav-link">
+    <i class="fa-solid fa-user-plus"></i> User Management
+    </a>
+    </li> -->
+            <!-- <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="fas fa-file-invoice-dollar"></i> Stocks
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="order.php" class="nav-link">
                     <i class="fas fa-align-right"></i> Orders
                 </a>
             </li>
@@ -346,12 +426,12 @@
             <div class="account-section-title">ACCOUNT PAGES</div>
             
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="./profile.php" class="nav-link">
                     <i class="fas fa-user"></i> Profile
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="./Config/logout.php" class="nav-link">
                     <i class="fas fa-sign-in-alt"></i> Sign Out
                 </a>
             </li>
@@ -449,7 +529,7 @@
             <div class="col-md-8">
                 <div class="welcome-card">
                     <p class="mb-1">Welcome back,</p>
-                    <h1>Luis Gabrielle</h1>
+                    <h1><?php echo $userName; ?></h1>
                     <p>Glad to see you again!<br>Ask me anything.</p>
                     <button class="btn btn-light btn-sm mt-3">
                         <i class="fas fa-play me-1"></i> Tap to record
