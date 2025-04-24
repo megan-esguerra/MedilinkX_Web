@@ -351,7 +351,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="./Config/user_api/logout.php" class="nav-link">
                     <i class="fas fa-sign-in-alt"></i> Sign Out
                 </a>
             </li>
