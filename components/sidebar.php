@@ -36,6 +36,12 @@ require_once __DIR__ . '/functions.php';
                 <span>Sales Report</span>
             </a>
         </li>
+        <li class="nav-item">
+                <a href="order.php" class="nav-link">
+                    <i class="fas fa-align-right"></i> Orders
+                </a>
+            </li>
+
         <!-- <li class="nav-item">
             <a href="user-management.php" class="nav-link">
             <i class="fa-solid fa-user-plus"></i> User Management
@@ -58,11 +64,11 @@ require_once __DIR__ . '/functions.php';
                 <span>Sign In</span>
             </a>
         </li> -->
-        <li class="nav-item">
+        <!-- <li class="nav-item">
             <a href="registration.php" class="nav-link">
                 <i class="fas fa-user-plus"></i>
                 <span>Sign Up</span>
             </a>
-        </li>
+        </li> -->
     </ul>
 </div>

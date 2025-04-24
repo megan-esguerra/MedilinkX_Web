@@ -418,7 +418,7 @@ $userName = !empty($user['full_name']) ? htmlspecialchars($user['full_name']) :
                 </a>
             </li> -->
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="order.php" class="nav-link">
                     <i class="fas fa-align-right"></i> Orders
                 </a>
             </li>
