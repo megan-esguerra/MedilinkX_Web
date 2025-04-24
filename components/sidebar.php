@@ -36,7 +36,11 @@ require_once __DIR__ . '/functions.php';
                 <span>Sales Report</span>
             </a>
         </li>
-        
+        <!-- <li class="nav-item">
+            <a href="user-management.php" class="nav-link">
+            <i class="fa-solid fa-user-plus"></i> User Management
+            </a>
+        </li> -->
         
         <div class="account-section-title">
             ACCOUNT PAGES
