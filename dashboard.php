@@ -352,12 +352,7 @@
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="fas fa-sign-in-alt"></i> Sign In
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="fas fa-user-plus"></i> Sign Up
+                    <i class="fas fa-sign-in-alt"></i> Sign Out
                 </a>
             </li>
         </ul>
@@ -392,7 +387,7 @@
                 <div class="d-flex align-items-center">
                     <button class="btn btn-light me-2"><i class="fas fa-cog"></i></button>
                     <button class="btn btn-light me-2"><i class="fas fa-bell"></i></button>
-                    <button class="btn btn-primary">Sign in</button>
+                   
                 </div>
             </div>
         </div>
@@ -462,7 +457,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="stat-card h-100">
+                <div class="stat-card h-70">
                     <h5 class="mb-4">Satisfaction Rate</h5>
                     <div class="satisfaction-card">
                         <div id="satisfactionChart" style="width: 100%; height: 150px;"></div>
