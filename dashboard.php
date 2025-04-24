@@ -375,16 +375,21 @@ $userName = isset($user['full_name']) && !empty($user['full_name']) ?
         <i class="fas fa-chart-bar"></i> Sales Report
     </a>
 </li>
+     <!-- <li class="nav-item">
+     <a href="user-management.php" class="nav-link">
+    <i class="fa-solid fa-user-plus"></i> User Management
+    </a>
+    </li> -->
             <!-- <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="fas fa-file-invoice-dollar"></i> Stocks
                 </a>
-            </li>
+            </li> -->
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="fas fa-align-right"></i> Orders
                 </a>
-            </li> -->
+            </li>
             
             <div class="account-section-title">ACCOUNT PAGES</div>
             
