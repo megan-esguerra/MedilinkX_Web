@@ -136,7 +136,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         .submit-btn:hover {
             background: linear-gradient(to right, #2979ff, #1c54b2);
         }
+        .register-link a {
+            color: #2979ff;
+            text-decoration: none;
+            font-weight: 500;
+        }
         
+        .register-link a:hover {
+            text-decoration: underline;
+        }
         .forgot-password {
             margin-top: 20px;
             font-size: 14px;
@@ -178,6 +186,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </form>
             <div class="forgot-password">
                 <a href="forgot-password.php">Forgot your password?</a>
+            </div>
+            <div class="register-link">
+                Don't have an account? <a href="registration.php">Register now</a>
             </div>
         </div>
     </div>

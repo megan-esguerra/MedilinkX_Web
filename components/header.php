@@ -25,8 +25,8 @@ require_once __DIR__ . '/functions.php';
         <button class="btn btn-light me-2">
             <i class="fas fa-bell"></i>
         </button>
-        <button class="btn btn-primary">
+        <!-- <button class="btn btn-primary">
             Sign in
-        </button>
+        </button> -->
     </div>
 </div>

@@ -37,24 +37,25 @@ require_once __DIR__ . '/functions.php';
             </a>
         </li>
         
+        
         <div class="account-section-title">
             ACCOUNT PAGES
         </div>
         
         <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="profile.php" class="nav-link">
                 <i class="fas fa-user"></i>
                 <span>Profile</span>
             </a>
         </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link">
+        <!-- <li class="nav-item">
+            <a href="." class="nav-link">
                 <i class="fas fa-sign-in-alt"></i>
                 <span>Sign In</span>
             </a>
-        </li>
+        </li> -->
         <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="registration.php" class="nav-link">
                 <i class="fas fa-user-plus"></i>
                 <span>Sign Up</span>
             </a>

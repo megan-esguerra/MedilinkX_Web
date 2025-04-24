@@ -375,7 +375,7 @@ $userName = isset($user['full_name']) && !empty($user['full_name']) ?
         <i class="fas fa-chart-bar"></i> Sales Report
     </a>
 </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="fas fa-file-invoice-dollar"></i> Stocks
                 </a>
@@ -384,12 +384,12 @@ $userName = isset($user['full_name']) && !empty($user['full_name']) ?
                 <a href="#" class="nav-link">
                     <i class="fas fa-align-right"></i> Orders
                 </a>
-            </li>
+            </li> -->
             
             <div class="account-section-title">ACCOUNT PAGES</div>
             
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="./profile.php" class="nav-link">
                     <i class="fas fa-user"></i> Profile
                 </a>
             </li>
@@ -487,7 +487,6 @@ $userName = isset($user['full_name']) && !empty($user['full_name']) ?
             </div>
         </div>
 
-        <!-- Welcome & Data Row -->
         <!-- Welcome & Data Row -->
         <div class="row">
             <div class="col-md-8">
