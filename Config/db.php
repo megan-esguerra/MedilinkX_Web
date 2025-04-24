@@ -1,6 +1,6 @@
 <?php
 $host = "localhost";
-$dbname = "medilink";
+$dbname = "medilinkx";
 $username = "root";
 $password = "";
 
