@@ -1,3 +1,30 @@
+<?php
+// Start session at the beginning of the file
+session_start();
+
+// Check if user is logged in
+if (!isset($_SESSION['user_id'])) {
+    // Redirect to login page if not logged in
+    header("Location: login.php");
+    exit;
+}
+
+// Connect to database to fetch user details
+require_once 'Config/db.php';
+
+// Get user information
+$user_id = $_SESSION['user_id'];
+$stmt = $pdo->prepare("SELECT * FROM users WHERE user_id = ?");
+$stmt->execute([$user_id]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Default name if user data is incomplete
+$userName = isset($user['full_name']) && !empty($user['full_name']) ? 
+    htmlspecialchars($user['full_name']) : 
+    htmlspecialchars($user['username']);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -461,11 +488,12 @@
         </div>
 
         <!-- Welcome & Data Row -->
+        <!-- Welcome & Data Row -->
         <div class="row">
             <div class="col-md-8">
                 <div class="welcome-card">
                     <p class="mb-1">Welcome back,</p>
-                    <h1>Luis Gabrielle</h1>
+                    <h1><?php echo $userName; ?></h1>
                     <p>Glad to see you again!<br>Ask me anything.</p>
                     <button class="btn btn-light btn-sm mt-3">
                         <i class="fas fa-play me-1"></i> Tap to record
