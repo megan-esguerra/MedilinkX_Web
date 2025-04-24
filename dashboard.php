@@ -1,28 +1,60 @@
 <?php
-// Start session at the beginning of the file
 session_start();
+require_once 'Config/db.php';
+require_once 'components/check_session.php';
 
-// Check if user is logged in
-if (!isset($_SESSION['user_id'])) {
-    // Redirect to login page if not logged in
-    header("Location: login.php");
-    exit;
+// Check session
+checkSession();
+
+// Get user information with proper error handling
+try {
+    $user_id = $_SESSION['user_id'];
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE user_id = ?");
+    $stmt->execute([$user_id]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$user) {
+        // User not found in database
+        session_destroy();
+        header("Location: login.php?error=invalid_user");
+        exit;
+    }
+
+    // Get dashboard statistics
+    $totalProducts = $pdo->query("SELECT COUNT(*) FROM products")->fetchColumn() ?? 0;
+    $totalUsers = $pdo->query("SELECT COUNT(*) FROM users")->fetchColumn() ?? 0;
+    $todayMoney = $pdo->query("SELECT COALESCE(SUM(total_amount), 0) FROM orders WHERE DATE(order_date) = CURRENT_DATE")->fetchColumn() ?? 0;
+    $totalSales = $pdo->query("SELECT COALESCE(SUM(total_amount), 0) FROM orders")->fetchColumn() ?? 0;
+
+    // Get recent orders
+    $recentOrders = $pdo->query("
+        SELECT o.*, u.username, u.full_name 
+        FROM orders o 
+        LEFT JOIN users u ON o.user_id = u.user_id 
+        ORDER BY o.order_date DESC 
+        LIMIT 5
+    ")->fetchAll(PDO::FETCH_ASSOC) ?? [];
+
+} catch (PDOException $e) {
+    error_log("Database error: " . $e->getMessage());
+    $user = [
+        'username' => 'Guest',
+        'full_name' => 'Guest User'
+    ];
+    $totalProducts = 0;
+    $totalUsers = 0;
+    $todayMoney = 0;
+    $totalSales = 0;
+    $recentOrders = [];
 }
 
-// Connect to database to fetch user details
-require_once 'Config/db.php';
+// Set username with validation
+$userName = !empty($user['full_name']) ? htmlspecialchars($user['full_name']) : 
+           (!empty($user['username']) ? htmlspecialchars($user['username']) : 'Guest');
 
-// Get user information
-$user_id = $_SESSION['user_id'];
-$stmt = $pdo->prepare("SELECT * FROM users WHERE user_id = ?");
-$stmt->execute([$user_id]);
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-// Default name if user data is incomplete
-$userName = isset($user['full_name']) && !empty($user['full_name']) ? 
-    htmlspecialchars($user['full_name']) : 
-    htmlspecialchars($user['username']);
 ?>
+
+
 
 
 <!DOCTYPE html>

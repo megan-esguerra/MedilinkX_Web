@@ -278,9 +278,7 @@ foreach ($products as $product) {
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0"><i class="fas fa-list me-2"></i>Products List</h5>
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
-                        <i class="fas fa-plus me-2"></i>Add Product
-                    </button>
+                
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
