@@ -58,6 +58,11 @@ require_once __DIR__ . '/functions.php';
                 <span>Profile</span>
             </a>
         </li>
+        <li class="nav-item">
+                <a href="./Config/logout.php" class="nav-link">
+                    <i class="fas fa-sign-in-alt"></i> Sign Out
+                </a>
+            </li>
         <!-- <li class="nav-item">
             <a href="." class="nav-link">
                 <i class="fas fa-sign-in-alt"></i>

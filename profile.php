@@ -118,7 +118,114 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <?php require_once __DIR__ . '/components/styles.php'; ?>
     <style>
-        /* Your existing styles */
+        body {
+            background-color: #f8f9fa;
+        }
+        .avatar-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #007bff;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        .profile-details {
+            display: flex;
+            flex-direction: column;
+        }
+        .profile-details .label {
+            font-weight: bold;
+        }
+        .profile-details .value {
+            margin-bottom: 10px;
+        }
+        .account-section-title {
+            font-size: 14px;
+            color: #6c757d;
+            margin: 20px 0 10px;
+            text-transform: uppercase;
+        }
+        .card-header {
+            background-color: #007bff;
+            color: white;
+        }
+        .card-header i {
+            margin-right: 5px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .form-label {
+            font-weight: bold;
+        }
+        .form-text {
+            font-size: 12px;
+            color: #6c757d;
+        }
+        .text-end {
+            margin-top: 20px;
+        }
+        .alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1050;
+            width: 300px;
+        }
+        .alert i {
+            margin-right: 5px;
+        }
+        .alert-dismissible .btn-close {
+            padding: 0.5rem 1rem;
+        }
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .alert-dismissible .btn-close {
+            position: absolute;
+            top: 0.5rem;
+            right: 1rem;
+            z-index: 1051;
+        }
+        .alert-dismissible .btn-close:hover {
+            color: #000;
+        }
+        .alert-dismissible .btn-close:focus {
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+        }
+        .alert-dismissible .btn-close:not(:disabled):not(.disabled) {
+            cursor: pointer;
+        }
+        .alert-dismissible .btn-close:focus {
+            outline: none;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+        }
+        .alert-dismissible .btn-close:focus:not(:disabled):not(.disabled) {
+            cursor: pointer;
+        }
+        .alert-dismissible .btn-close:focus:not(:disabled):not(.disabled) {
+            cursor: pointer;
+        }
+
+        
     </style>
 </head>
 <body>
@@ -145,37 +252,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="row">
             <!-- User Info Card -->
             <div class="col-lg-4 mb-4">
-                <div class="card">
-                    <div class="card-header">User Information</div>
-                    <div class="card-body">
-                        <div class="avatar-container">
-                            <div class="avatar">
+                <div class="card h-100">
+                    <div class="card-header text-center">User Information</div>
+                    <div class="card-body d-flex flex-column align-items-center">
+                        <div class="avatar-container text-center">
+                            <div class="avatar mx-auto mb-3">
                                 <?= strtoupper(substr($user['full_name'] ?? $user['username'] ?? 'U', 0, 1)) ?>
                             </div>
-                            <h5><?= htmlspecialchars($user['full_name'] ?? $user['username'] ?? 'User') ?></h5>
-                            <span class="badge bg-primary">
+                            <h5 class="mb-2"><?= htmlspecialchars($user['full_name'] ?? $user['username'] ?? 'User') ?></h5>
+                            <span class="badge bg-primary mb-3">
                                 <?= ucfirst(htmlspecialchars($user['role'] ?? 'user')) ?>
                             </span>
                         </div>
                         
-                        <hr>
+                        <hr class="w-100 my-3">
                         
-                        <div class="profile-details">
-                            <div>
-                                <div class="label">Username</div>
-                                <div class="value"><?= htmlspecialchars($user['username'] ?? 'Not set') ?></div>
+                        <div class="profile-details w-100">
+                            <div class="row mb-3">
+                                <div class="col-5 label">Username:</div>
+                                <div class="col-7 text-end"><?= htmlspecialchars($user['username'] ?? 'Not set') ?></div>
                             </div>
-                            <div>
-                                <div class="label">Email</div>
-                                <div class="value"><?= htmlspecialchars($user['email'] ?? 'Not set') ?></div>
+                            <div class="row mb-3">
+                                <div class="col-5 label">Email:</div>
+                                <div class="col-7 text-end"><?= htmlspecialchars($user['email'] ?? 'Not set') ?></div>
                             </div>
-                            <div>
-                                <div class="label">Phone</div>
-                                <div class="value"><?= htmlspecialchars($user['phone'] ?? 'Not specified') ?></div>
+                            <div class="row mb-3">
+                                <div class="col-5 label">Phone:</div>
+                                <div class="col-7 text-end"><?= htmlspecialchars($user['phone'] ?? 'Not specified') ?></div>
                             </div>
-                            <div>
-                                <div class="label">Member Since</div>
-                                <div class="value">
+                            <div class="row">
+                                <div class="col-5 label">Member Since:</div>
+                                <div class="col-7 text-end">
                                     <?= $user['created_at'] ? date('M d, Y', strtotime($user['created_at'])) : 'Unknown' ?>
                                 </div>
                             </div>
