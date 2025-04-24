@@ -328,10 +328,26 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="products.php" class="nav-link">
                     <i class="fas fa-table"></i> Products
                 </a>
             </li>
+            <li class="nav-item">
+    <a href="categories.php" class="nav-link">
+        <i class="fas fa-list"></i> Categories
+    </a>
+</li>
+<!-- In your dashboard.php sidebar -->
+<li class="nav-item">
+    <a href="inventory_management.php" class="nav-link">
+        <i class="fas fa-boxes"></i> Inventory
+    </a>
+</li>
+<li class="nav-item">
+    <a href="sales_report.php" class="nav-link">
+        <i class="fas fa-chart-bar"></i> Sales Report
+    </a>
+</li>
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="fas fa-file-invoice-dollar"></i> Stocks
