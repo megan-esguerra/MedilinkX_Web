@@ -255,7 +255,7 @@ $avg_order = $total_orders > 0 ? $total_sales / $total_orders : 0;
                     <div class="report-card">
                         <div class="card-body">
                             <h6 class="text-muted mb-1">Total Sales</h6>
-                            <h3 class="mb-0">$<?= number_format($total_sales, 2) ?></h3>
+                            <h3 class="mb-0">₱<?= number_format($total_sales, 2) ?></h3>
                             <small class="<?= $comparison['sales_change'] >= 0 ? 'text-success' : 'text-danger' ?>">
                                 <i class="fas fa-arrow-<?= $comparison['sales_change'] >= 0 ? 'up' : 'down' ?>"></i>
                                 <?= number_format(abs($comparison['sales_change']), 1) ?>% from previous period
@@ -288,7 +288,7 @@ $avg_order = $total_orders > 0 ? $total_sales / $total_orders : 0;
                     <div class="report-card">
                         <div class="card-body">
                             <h6 class="text-muted mb-1">Average Order Value</h6>
-                            <h3 class="mb-0">$<?= number_format($avg_order, 2) ?></h3>
+                            <h3 class="mb-0">₱<?= number_format($avg_order, 2) ?></h3>
                             <small class="text-muted">Per order</small>
                         </div>
                     </div>
@@ -329,7 +329,7 @@ $avg_order = $total_orders > 0 ? $total_sales / $total_orders : 0;
                                         <tr>
                                             <td><?= htmlspecialchars($product['name']) ?></td>
                                             <td><?= number_format($product['total_quantity']) ?></td>
-                                            <td>$<?= number_format($product['total_revenue'], 2) ?></td>
+                                            <td>₱<?= number_format($product['total_revenue'], 2) ?></td>
                                         </tr>
                                         <?php endforeach; ?>
                                     </tbody>
@@ -405,7 +405,7 @@ $avg_order = $total_orders > 0 ? $total_sales / $total_orders : 0;
                                         </span>
                                     </td>
                                     <td>
-                                        <strong>$<?= number_format($sale['total_amount'], 2) ?></strong>
+                                        <strong>₱<?= number_format($sale['total_amount'], 2) ?></strong>
                                     </td>
                                     <td>
                                         <span class="badge bg-<?= $statusClass ?>">
@@ -453,7 +453,7 @@ $avg_order = $total_orders > 0 ? $total_sales / $total_orders : 0;
             data: {
                 labels: <?= json_encode(array_column($sales_data, 'date_group')) ?>,
                 datasets: [{
-                    label: 'Sales ($)',
+                    label: 'Sales (₱)',
                     data: <?= json_encode(array_column($sales_data, 'total_sales')) ?>,
                     borderColor: '#4a89dc',
                     backgroundColor: 'rgba(74, 137, 220, 0.1)',

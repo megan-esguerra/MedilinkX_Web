@@ -292,7 +292,7 @@ $userName = !empty($user['full_name']) ? htmlspecialchars($user['full_name']) :
               <div class="stat-card d-flex justify-content-between">
                   <div>
                       <h5>Today's Money</h5>
-                      <h2>$89.91</h2>
+                      <h2>₱89.91</h2>
                       <span class="positive-change">+0.0%</span>
                   </div>
                   <div class="icon">
@@ -328,7 +328,7 @@ $userName = !empty($user['full_name']) ? htmlspecialchars($user['full_name']) :
               <div class="stat-card d-flex justify-content-between">
                   <div>
                       <h5>Monthly Sales</h5>
-                      <h2>$89.91</h2>
+                      <h2>₱89.91</h2>
                       <span class="positive-change">+0.0%</span>
                   </div>
                   <div class="icon">

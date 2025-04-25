@@ -307,7 +307,7 @@ foreach ($products as $product) {
                                     <td><?= htmlspecialchars($product['name']) ?></td>
                                     <td><?= htmlspecialchars($product['category_name']) ?></td>
                                     <td><?= htmlspecialchars($product['supplier_name']) ?></td>
-                                    <td>$<?= number_format($product['price'], 2) ?></td>
+                                    <td>₱<?= number_format($product['price'], 2) ?></td>
                                     <td>
                                         <span class="badge bg-<?= $product['stock'] == 0 ? 'danger' : ($product['stock'] <= $product['reorder_level'] ? 'warning' : 'success') ?>">
                                             <?= $product['stock'] == 0 ? 'Out of Stock' : $product['stock'] ?>
